@@ -1,0 +1,738 @@
+:root {
+  --bg: #f6f1e4;
+  --card: #fffdf6;
+  --ink: #1d2b24;
+  --mut: #6b7a70;
+  --pri: #0f6b4b;
+  --pri2: #0a4e37;
+  --gold: #c8962b;
+  --line: #e6dcc3;
+  --ok: #1b8a5a;
+  --sh: 0 8px 28px rgba(15, 60, 40, .10);
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1a15;
+    --card: #17261f;
+    --ink: #eef2ea;
+    --mut: #9db0a4;
+    --pri: #2fb583;
+    --pri2: #1f8a62;
+    --gold: #e0b04a;
+    --line: #27402f;
+    --sh: 0 8px 28px rgba(0, 0, 0, .4);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1a15;
+  --card: #17261f;
+  --ink: #eef2ea;
+  --mut: #9db0a4;
+  --pri: #2fb583;
+  --pri2: #1f8a62;
+  --gold: #e0b04a;
+  --line: #27402f;
+  --sh: 0 8px 28px rgba(0, 0, 0, .4);
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Tajawal, system-ui, sans-serif;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(circle at 90% -10%, rgba(200, 150, 43, .18), transparent 40%),
+    radial-gradient(circle at 0 110%, rgba(15, 107, 75, .15), transparent 45%);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: Amiri, serif;
+}
+
+.hide {
+  display: none !important;
+}
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.an {
+  animation: up .55s both cubic-bezier(.2, .8, .2, 1);
+}
+
+/* ===== النافبار ===== */
+nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--sh);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+nav .logo {
+  font-family: Amiri, serif;
+  font-size: 22px;
+  color: var(--pri);
+  margin-inline-end: 10px;
+}
+
+nav .menu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+nav button.t {
+  background: none;
+  border: 0;
+  color: var(--mut);
+  font: 600 15px Tajawal;
+  padding: 9px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+nav button.t.on,
+nav button.t:hover {
+  background: var(--pri);
+  color: #fff;
+}
+
+nav .me {
+  margin-inline-start: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* زرار الوضع الفاتح/الغامق وزرار القائمة */
+.ic {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  transition: .2s;
+}
+
+.ic:hover {
+  border-color: var(--gold);
+}
+
+.burger {
+  display: none;
+}
+
+.av {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold);
+  background: var(--line);
+  flex: none;
+}
+
+main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 18px 14px 60px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: var(--sh);
+  margin-bottom: 16px;
+}
+
+.btn {
+  background: linear-gradient(135deg, var(--pri), var(--pri2));
+  color: #fff;
+  border: 0;
+  border-radius: 14px;
+  padding: 13px 22px;
+  font: 700 16px Tajawal;
+  cursor: pointer;
+  transition: .2s;
+  width: 100%;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn.sm {
+  width: auto;
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+.btn.ghost {
+  background: none;
+  color: var(--pri);
+  border: 1.5px solid var(--pri);
+}
+
+input[type=text],
+input[type=password] {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font: 500 16px Tajawal;
+  margin: 6px 0 12px;
+  outline: none;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+  border-color: var(--pri);
+}
+
+label.l {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--mut);
+}
+
+.login {
+  max-width: 420px;
+  margin: 6vh auto 0;
+  text-align: center;
+}
+
+.login h1 {
+  font-size: 40px;
+  color: var(--pri);
+}
+
+.login p {
+  color: var(--mut);
+  margin: 4px 0 18px;
+}
+
+.seg {
+  display: flex;
+  background: var(--bg);
+  border-radius: 14px;
+  padding: 4px;
+  margin-bottom: 14px;
+}
+
+.seg button {
+  flex: 1;
+  border: 0;
+  background: none;
+  padding: 10px;
+  border-radius: 11px;
+  font: 700 15px Tajawal;
+  color: var(--mut);
+  cursor: pointer;
+}
+
+.seg button.on {
+  background: var(--pri);
+  color: #fff;
+}
+
+.pick {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  text-align: start;
+}
+
+.pick .av {
+  width: 64px;
+  height: 64px;
+}
+
+.err {
+  color: #c0392b;
+  font-weight: 700;
+  min-height: 20px;
+  margin: 6px 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chk {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.chk input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--pri);
+}
+
+.chk b {
+  flex: 1;
+}
+
+.chk span {
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.chk:has(input:checked) {
+  border-color: var(--pri);
+  background: rgba(15, 107, 75, .08);
+}
+
+.chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 8px;
+  max-height: 320px;
+  overflow: auto;
+  padding: 4px;
+}
+
+.chip {
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 6px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: .2s;
+  user-select: none;
+}
+
+.chip small {
+  display: block;
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.chip.on {
+  background: var(--pri);
+  color: #fff;
+  border-color: var(--pri);
+  animation: pop .3s;
+}
+
+.chip.on small {
+  color: #ffe8a8;
+}
+
+.total {
+  position: sticky;
+  bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  background: var(--card);
+  border: 1px solid var(--gold);
+  border-radius: 18px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--sh);
+}
+
+.total .n {
+  font: 800 28px Tajawal;
+  color: var(--gold);
+  min-width: 64px;
+}
+
+.rank {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  margin-bottom: 8px;
+  background: var(--card);
+}
+
+.rank .no {
+  width: 34px;
+  font: 800 20px Tajawal;
+  color: var(--mut);
+  text-align: center;
+}
+
+.rank:nth-child(1) .no {
+  color: #d4a017;
+}
+
+.rank:nth-child(2) .no {
+  color: #9aa4ab;
+}
+
+.rank:nth-child(3) .no {
+  color: #b0713c;
+}
+
+.rank .nm {
+  flex: 1;
+  font-weight: 700;
+}
+
+.rank .pt {
+  font-weight: 800;
+  color: var(--pri);
+}
+
+.safe {
+  color: var(--mut);
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.mem {
+  text-align: center;
+  padding: 16px 10px;
+}
+
+.mem .av {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 8px;
+  display: block;
+}
+
+.mem.ok {
+  border: 2px solid var(--ok);
+}
+
+.mem.no {
+  border: 2px solid #c0392b;
+}
+
+.clk {
+  cursor: pointer;
+}
+
+/* خانة الباسورد مع زرار الإظهار/الإخفاء */
+.pw {
+  position: relative;
+  margin: 6px 0 12px;
+}
+
+.pw input[type=password],
+.pw input[type=text] {
+  margin: 0;
+  padding-inline-end: 52px;
+}
+
+.eye {
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 8px;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border: 0;
+  background: none;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.log {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.log:last-child {
+  border: 0;
+}
+
+.log .tx {
+  flex: 1;
+  line-height: 1.7;
+}
+
+.log small {
+  color: var(--mut);
+}
+
+.tag {
+  display: inline-block;
+  background: rgba(200, 150, 43, .18);
+  color: var(--gold);
+  border-radius: 8px;
+  padding: 1px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  margin: 1px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--mut);
+  padding: 30px;
+}
+
+.done {
+  text-align: center;
+  padding: 24px;
+}
+
+.done .big {
+  font-size: 52px;
+  animation: pop .6s;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.step button {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1.5px solid var(--pri);
+  background: none;
+  color: var(--pri);
+  font: 800 22px Tajawal;
+  cursor: pointer;
+}
+
+.step input {
+  width: 62px;
+  height: 42px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font: 800 18px Tajawal;
+}
+
+.bsm {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  line-height: 1.5;
+  color: var(--pri);
+  margin-bottom: 4px;
+}
+
+.bsm span {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: Amiri, serif;
+  font-size: 100px;
+}
+
+.login h1 {
+  margin-top: 2px;
+}
+
+.lockd {
+  opacity: .55;
+}
+
+.lockd .pt {
+  filter: blur(4px);
+  user-select: none;
+}
+
+.dayc {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dayc .tx {
+  flex: 1;
+  line-height: 1.8;
+}
+
+.dayc .pt {
+  font: 800 20px Tajawal;
+  color: var(--gold);
+}
+
+/* ===== موبايل وتابلت: المنيو تتحول لـ dropdown ===== */
+@media (max-width: 900px) {
+  nav {
+    overflow: visible;
+  }
+
+  nav .menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 10px 12px 12px;
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--sh);
+  }
+
+  nav .menu.open {
+    display: flex;
+    animation: up .25s both;
+  }
+
+  nav .menu button.t {
+    text-align: start;
+    padding: 13px 14px;
+    font-size: 16px;
+  }
+
+  .burger {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 560px) {
+  nav .nm {
+    display: none;
+  }
+
+  nav .logo {
+    font-size: 19px;
+    margin-inline-end: 0;
+  }
+
+  main {
+    padding: 12px 10px 60px;
+  }
+
+  .login h1 {
+    font-size: 34px;
+  }
+}
+
+/* زرار الحذف ونافذة التأكيد */
+.btn.danger {
+  background: #c0392b;
+  color: #fff;
+}
+
+.mdl {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, .55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.mdl .box {
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--sh);
+  padding: 22px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+
+.mdl .box .big {
+  font-size: 40px;
+}
+
+.mdl .box .av {
+  width: 64px;
+  height: 64px;
+  margin: 6px auto 0;
+  display: block;
+}
